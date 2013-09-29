@@ -40,6 +40,7 @@ gem 'simple_form'
 #gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
 #                              :github => 'anjlab/bootstrap-rails'
 gem 'validates_email_format_of'
+gem 'pwdcalc'
 
 # Use unicorn as the app server
 # gem 'unicorn'

@@ -8,9 +8,10 @@
   <% end %>
 
   <%= f.input :email %>
-  <%= f.input :password %>
+  <%= f.input :password, :as => :pwdcalc_simple, :'data-dictionary' => 'obviousPasswords()' %>
   <%= f.input :password_confirmation %>
   <%= f.association :groups,   as: :check_boxes %>
   <%= f.button :submit %>
+  <%= pwdcalc_hints %>
 <% end %>
 

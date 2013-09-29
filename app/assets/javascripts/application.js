@@ -13,4 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.YAPSM.min
+//= require jquery.pwdcalc
 //= require_tree .
