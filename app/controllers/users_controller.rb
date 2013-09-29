@@ -15,17 +15,24 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @groups = Group.all
   end
 
   # GET /users/1/edit
   def edit
+    @groups = Group.all
   end
 
   # POST /users
   # POST /users.json
   def create
 #    @user = User.new(params[:user])
-    @user = User.new(params[:user].permit(:email, :password, :password_confirmation))
+    @user = User.new(params[:user].permit(:email, :password, :password_confirmation, :group_ids))
+    @user.update_attributes(params[:group])
+#    groups = params[:user][:group_ids] #|| []
+#    groups.each { |e|
+#      g = @user.groups << e.id 
+#     }
     if @user.save
       redirect_to root_url, :notice => "Signed up!"
     else
@@ -37,7 +44,9 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(user_params) && @user.update_attributes(params[:group])
+
+
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
