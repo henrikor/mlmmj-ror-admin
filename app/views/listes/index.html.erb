@@ -1,0 +1,31 @@
+<h1>Listing listes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Navn</th>
+      <th>Bane</th>
+      <th>Beskrivelse</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @listes.each do |liste| %>
+      <tr>
+        <td><%= liste.navn %></td>
+        <td><%= liste.bane %></td>
+        <td><%= liste.beskrivelse %></td>
+        <td><%= link_to 'Show', liste %></td>
+        <td><%= link_to 'Edit', edit_liste_path(liste) %></td>
+        <td><%= link_to 'Destroy', liste, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Liste', new_liste_path %>

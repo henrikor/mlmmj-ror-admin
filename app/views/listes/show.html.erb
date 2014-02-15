@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Navn:</strong>
+  <%= @liste.navn %>
+</p>
+
+<p>
+  <strong>Bane:</strong>
+  <%= @liste.bane %>
+</p>
+
+<p>
+  <strong>Beskrivelse:</strong>
+  <%= @liste.beskrivelse %>
+</p>
+
+<%= link_to 'Edit', edit_liste_path(@liste) %> |
+<%= link_to 'Back', listes_path %>

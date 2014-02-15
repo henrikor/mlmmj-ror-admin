@@ -1,21 +1,28 @@
 <% if signed_in? %>
   <div class="row">
     <aside class="span4">
+      <h1>Du er logget inn</h1>
+      <p>Dine tilgjengelige lister:</p>
+      <% @current_user.groups.each do |group|
+        list = Liste.find(group.id) %>
+        <ul> <%= link_to(list.navn, "/listes/#{list.id}")  %> </ul>
+      <% end %>
+
+
     </aside>
     <div class="span8">
     </div>
   </div>  
 <% else %>
   <div class="center hero-unit">
-    <h1>Welcome to the Sample App</h1>
+    <h1>Velkommen!</h1>
+    <h2>til webside for å administrere e-post lister</h2>
 
-    <h2>
-      This is the home page for the
-      <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
-      sample application.
-    </h2>
 
-    <%= link_to "Sign up now!", signup_path, 
+    <%= link_to "Lag en konto!", signup_path, 
+                                class: "btn btn-large btn-primary" %>
+                                <p>Eller</p>
+    <%= link_to "Logg inn!", signin_path, 
                                 class: "btn btn-large btn-primary" %>
   </div>
 
