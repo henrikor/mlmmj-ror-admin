@@ -3,9 +3,9 @@
     <aside class="span4">
       <h1>Du er logget inn</h1>
       <p>Dine tilgjengelige lister:</p>
-      <% @current_user.groups.each do |group|
-        list = Liste.find(group.id) %>
-        <ul> <%= link_to(list.navn, "/listes/#{list.id}")  %> </ul>
+      <% lists = Liste.lists_for_user(@current_user)
+      lists.each do |list| %>
+          <ul> <%= link_to(list.navn, "/listes/#{list.id}") unless list == nil  %> </ul>      
       <% end %>
 
 
