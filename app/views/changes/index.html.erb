@@ -1,0 +1,33 @@
+<h1>Listing changes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>List</th>
+      <th>Added adresses</th>
+      <th>Removed adresses</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @changes.each do |change| %>
+      <tr>
+        <td><%= change.user_id %></td>
+        <td><%= change.list_id %></td>
+        <td><%= change.added_adresses %></td>
+        <td><%= change.removed_adresses %></td>
+        <td><%= link_to 'Show', change %></td>
+        <td><%= link_to 'Edit', edit_change_path(change) %></td>
+        <td><%= link_to 'Destroy', change, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Change', new_change_path %>

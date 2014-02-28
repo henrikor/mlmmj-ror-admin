@@ -37,6 +37,13 @@ class User < ActiveRecord::Base
     relationships.find_by(followed_id: other_user.id).destroy
   end
 
+  def self.moderator?(current_user)
+    if self.joins(:groups).where("group.group_navn = 'moderator'") != nil
+      return true
+    else
+      return false
+    end
+  end
   private
 
     def create_remember_token

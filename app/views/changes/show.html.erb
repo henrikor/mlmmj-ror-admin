@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @change.user_id %>
+</p>
+
+<p>
+  <strong>List:</strong>
+  <%= @change.list_id %>
+</p>
+
+<p>
+  <strong>Added adresses:</strong>
+  <%= @change.added_adresses %>
+</p>
+
+<p>
+  <strong>Removed adresses:</strong>
+  <%= @change.removed_adresses %>
+</p>
+
+<%= link_to 'Edit', edit_change_path(@change) %> |
+<%= link_to 'Back', changes_path %>

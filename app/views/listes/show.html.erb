@@ -1,19 +1,43 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Navn:</strong>
-  <%= @liste.navn %>
+	<strong>Name:</strong>
+	<%= @liste.navn %>
 </p>
 
 <p>
-  <strong>Bane:</strong>
-  <%= @liste.bane %>
+	<strong>Path:</strong>
+	<%= @liste.bane %>
 </p>
 
 <p>
-  <strong>Beskrivelse:</strong>
-  <%= @liste.beskrivelse %>
+	<strong>Description:</strong>
+	<%= @liste.beskrivelse %>
 </p>
 
+
+<div class="row">
+	<div class="span6 offset3">
+<p>
+<%= render "changes/form" %>
+
+		<% form_for @change do |f| -%>
+		<%= render 'shared/error_messages', object: f.object %>
+
+
+		<strong>Subscribe:</strong>
+		<%= f.label :added_adresses %><br />
+		<%= f.text_area :added_adresses %>
+
+		<strong>Unsubscribe:</strong>
+		<%= f.label :removed_adresses %><br />
+		<%= f.text_area :removed_adresses %>
+		<% end -%>
+</p>
+	</div>
+</div>
+
+<% if current_user.admin? %>
 <%= link_to 'Edit', edit_liste_path(@liste) %> |
+<% end %>
 <%= link_to 'Back', listes_path %>

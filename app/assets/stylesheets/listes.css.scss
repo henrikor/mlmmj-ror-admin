@@ -1,3 +1,8 @@
 // Place all the styles related to the listes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+ h1 { padding: .2em; margin: 0; }
+#subscribed { float:left; width: 500px; margin-right: 2em; }
+#unsub { width: 200px; float: left; margin-top: 1em; }
+/* style the list to maximize the droppable hitarea */
+#unsub ol { margin: 0; padding: 1em 0 1em 3em; }

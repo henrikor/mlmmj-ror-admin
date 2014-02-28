@@ -1,15 +1,20 @@
 class ListesController < ApplicationController
   before_action :set_liste, only: [:show, :edit, :update, :destroy]
+  before_action :can_admin?, only: [:edit, :update, :destroy]
+  before_action :can_moderate?, only: [:show]
+  before_action :moderator?
 
   # GET /listes
   # GET /listes.json
   def index
-    @listes = Liste.all
+    @listes = Liste.lists_for_user(current_user)
   end
 
   # GET /listes/1
   # GET /listes/1.json
   def show
+    @change = Change.new
+    @subscribers = Liste.subscribers(params[:id])
   end
 
   # GET /listes/new
@@ -71,4 +76,14 @@ class ListesController < ApplicationController
     def liste_params
       params.require(:liste).permit(:navn, :bane, :beskrivelse, {:group_ids => []})
     end
+    def moderator?
+      redirect_to(root_url) unless User.moderator?(current_user)
+    end
+    def can_admin?
+      redirect_to(root_url) unless current_user.admin?
+    end
+    def can_moderate?
+      redirect_to(root_url) unless Liste.lists_for_user(current_user).include?(@liste)
+    end
+
 end
