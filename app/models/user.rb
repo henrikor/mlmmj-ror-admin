@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_and_belongs_to_many :groups
+  has_many :changes
   before_save { self.email = email.downcase }
   before_create :create_remember_token
   validates :name, presence: true, length: { maximum: 50 }
@@ -44,6 +45,15 @@ class User < ActiveRecord::Base
       return false
     end
   end
+
+  def self.email?(string)
+    if string =~ VALID_EMAIL_REGEX
+      return true
+    else
+      return false
+    end
+  end
+  
   private
 
     def create_remember_token

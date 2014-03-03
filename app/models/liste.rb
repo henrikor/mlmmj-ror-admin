@@ -1,5 +1,6 @@
 class Liste < ActiveRecord::Base
 	has_and_belongs_to_many :groups
+	has_many :changes
 
 	def self.lists_for_user(user)
 		if user.admin?
@@ -29,6 +30,31 @@ class Liste < ActiveRecord::Base
 		liste = self.find(list)
 		`/usr/bin/mlmmj-list -L #{liste.bane}`
 	end
+
+	def self.has_adress?(string, list)
+		members = subscribers(list)
+		if members =~ list
+			return true
+		else
+			return false
+		end
+	end
+
+	def self.mlmmj_sub(emails, liste)
+		errors = Array.new
+		emails.each_line do |single|
+			if User.email?(single) and not has_adress?(single)
+				result = %x(/usr/bin/mlmmj-sub -L /var/spool/mlmmj/test4 -a #{single} 2>&1) 
+				errors << result unless result = nil  			
+			end
+		end
+		if errors.any?
+			return "Errors occured: #{errors.to_s}"
+		else
+			return true  		
+		end
+	end
+
 
 	def innmeld(adresser)
 		adresser.scan(@emailRE) { |w| @adr << w}

@@ -1,4 +1,6 @@
 <%= form_for(@change) do |f| %>
+<input type="hidden" name="change[listbane]" value="<%= @liste.bane %>">
+
 <% if @change.errors.any? %>
 <div id="error_explanation">
   <h2><%= pluralize(@change.errors.count, "error") %> prohibited this change from being saved:</h2>
@@ -36,7 +38,7 @@
           <ol>
             <li class="placeholder">Drag email you will remove here</li>
           </ol>
-          <textarea name="unsub" id="unsub">
+          <textarea name="change[removed_adresses]" id="unsub" cols="20" rows="20">
           </textarea>
 
         </div>
@@ -46,7 +48,7 @@
 
       <div id="subscribe">
         <h2 class="ui-widget-header">Subscribe</h2>
-        <textarea name="sub" id="sub" class="form-control" rows="3">
+        <textarea name="change[added_adresses]" id="sub" class="form-control" rows="3">
         </textarea>
       </div>  
     </div>  

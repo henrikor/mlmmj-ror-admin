@@ -27,12 +27,14 @@ class ChangesController < ApplicationController
     @change = Change.new(change_params)
 
     respond_to do |format|
-      if @change.save
-        format.html { redirect_to @change, notice: 'Change was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @change }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @change.errors, status: :unprocessable_entity }
+      if Liste.mlmmj_sub(change_params[:added_adresses], change_params[:listbane]) #&& Change.mlmmj_unsub
+        if @change.save
+          format.html { redirect_to @change, notice: 'Change was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @change }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @change.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -69,6 +71,6 @@ class ChangesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def change_params
-      params.require(:change).permit(:user_id, :list_id, :added_adresses, :removed_adresses)
+      params.require(:change).permit(:user_id, :list_id, :added_adresses, :removed_adresses, :listbane)
     end
-end
+  end
