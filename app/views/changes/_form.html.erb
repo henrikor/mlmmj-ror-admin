@@ -2,7 +2,6 @@
 <% if @change.errors.any? %>
 <div id="error_explanation">
   <h2><%= pluralize(@change.errors.count, "error") %> prohibited this change from being saved:</h2>
-
   <ul>
     <% @change.errors.full_messages.each do |msg| %>
     <li><%= msg %></li>
@@ -12,30 +11,38 @@
 <% end %>
 
 <div id="products">
-  <h1 class="ui-widget-header">Subscribers</h1>
-  <div id="catalog">
-    <div>
-      <% @subscribers.each_line do |single| -%>        
-      <ul>
-        <li><%= single %></li>
-      </ul>
-      <% end %>
+  <h2 class="ui-widget-header">Subscribers</h1>
+    <div id="catalog">
+      <div>
+        <% @subscribers.each_line do |single| -%>        
+        <ul>
+          <li><%= single %></li>
+        </ul>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
 <div id="cart">
-  <h1 class="ui-widget-header">Unsubscribe</h1>
-  <div class="ui-widget-content">
-    <ol>
-      <li class="placeholder">Add your items here</li>
-    </ol>
+  <h2 class="ui-widget-header">Unsubscribe</h1>
+    <div class="ui-widget-content">
+      <ol>
+        <li class="placeholder">Add your items here</li>
+      </ol>
+      <textarea name="unsub" id="unsub" cols="20" rows="20">
+      </textarea>
+
+    </div>
   </div>
 </div>
 
-<textarea id="unsub" cols="20" rows="20">
-</textarea>
-
-<div class="actions">
-  <%= f.submit %>
-</div>
+<div id="subscribe">
+  <h2 class="ui-widget-header">Subscribe</h1>
+    <textarea name="sub" id="sub" cols="10" rows="10">
+    </textarea>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  </div>  
+</div>  
 <% end %>
