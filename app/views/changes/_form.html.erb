@@ -10,39 +10,54 @@
 </div>
 <% end %>
 
-<div id="products">
-  <h2 class="ui-widget-header">Subscribers</h1>
-    <div id="catalog">
-      <div>
-        <% @subscribers.each_line do |single| -%>        
-        <ul>
-          <li><%= single %></li>
-        </ul>
-        <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div id="products">
+        <h2 class="ui-widget-header">Subscribers</h2>
+        <div id="catalog">
+          <div>
+            <% @subscribers.each_line do |single| -%>        
+            <ul>
+              <li><%= single %></li>
+            </ul>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div id="cart">
-  <h2 class="ui-widget-header">Unsubscribe</h1>
-    <div class="ui-widget-content">
-      <ol>
-        <li class="placeholder">Add your items here</li>
-      </ol>
-      <textarea name="unsub" id="unsub" cols="20" rows="20">
-      </textarea>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div id="cart">
+        <h2 class="ui-widget-header">Unsubscribe</h2>
+        <div class="ui-widget-content">
+          <ol>
+            <li class="placeholder">Drag email you will remove here</li>
+          </ol>
+          <textarea name="unsub" id="unsub">
+          </textarea>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+
+      <div id="subscribe">
+        <h2 class="ui-widget-header">Subscribe</h2>
+        <textarea name="sub" id="sub" class="form-control" rows="3">
+        </textarea>
+      </div>  
+    </div>  
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="actions">
+        <%= f.submit %>
+      </div>
 
     </div>
   </div>
 </div>
-
-<div id="subscribe">
-  <h2 class="ui-widget-header">Subscribe</h1>
-    <textarea name="sub" id="sub" cols="10" rows="10">
-    </textarea>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-  </div>  
-</div>  
 <% end %>

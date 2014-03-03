@@ -1,6 +1,8 @@
  h1 { padding: .2em; margin: 0; }
-#products { float:left; width: 500px; margin-right: 2em; }
-#cart { width: 200px; float: left; margin-top: 1em; }
+#products { float:left; width: 100%; margin-right: 2em; }
+#cart { width: 100%; float: left; margin-top: 1em; }
+#subscribe { width: 100%; float: left; margin-top: 1em; }
+#sub { width: 100%; float: left; }
 /* style the list to maximize the droppable hitarea */
 #cart ol { margin: 0; padding: 1em 0 1em 3em; }
 #unsub { display:none; }
