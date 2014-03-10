@@ -32,9 +32,7 @@ class ChangesController < ApplicationController
     @change[:list_id] = liste.id
 
     respond_to do |format|
-#      if Liste.mlmmj_sub(change_params[:added_adresses], change_params[:listbane]) #&& Change.mlmmj_unsub
-
-      if Liste.mlmmj_sub(@change[:added_adresses], listbane) #&& Change.mlmmj_unsub
+      if Liste.mlmmj_sub(change_params[:added_adresses], liste.id) #&& Change.mlmmj_unsub
         if @change.save
           format.html { redirect_to @change, notice: "Change was successfully created."   }
           format.json { render action: 'show', status: :created, location: @change }
@@ -42,6 +40,9 @@ class ChangesController < ApplicationController
           format.html { render action: 'new' }
           format.json { render json: @change.errors, status: :unprocessable_entity }
         end
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @change.errors, status: :unprocessable_entity }       
       end
     end
   end

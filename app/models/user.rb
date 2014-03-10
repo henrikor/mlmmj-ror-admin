@@ -46,6 +46,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.email_regex
+    VALID_EMAIL_REGEX
+  end
   def self.email?(string)
     if string =~ VALID_EMAIL_REGEX
       return true
@@ -53,7 +56,7 @@ class User < ActiveRecord::Base
       return false
     end
   end
-  
+
   private
 
     def create_remember_token

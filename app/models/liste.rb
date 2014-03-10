@@ -26,53 +26,57 @@ class Liste < ActiveRecord::Base
 		end
 	end
 
-	def self.subscribers(list)
-		liste = self.find(list)
+	def self.subscribers(listeid)
+		liste = self.find(listeid)
 		`/usr/bin/mlmmj-list -L #{liste.bane}`
 	end
 
-	def self.has_adress?(string, list)
-		members = subscribers(list)
-		if members =~ list
+	def self.has_adress?(string, listeid)
+		members = subscribers(listeid)
+		if members =~ listeid
 			return true
 		else
 			return false
 		end
 	end
 
-	def self.mlmmj_sub(emails, liste)
+	def self.mlmmj_sub(emails, listeid)
 		errors = Array.new
-		emails.each_line do |single|
-			if User.email?(single) and not has_adress?(single)
-				result = %x(/usr/bin/mlmmj-sub -L /var/spool/mlmmj/test4 -a #{single} 2>&1) 
+		emailsarr = Array.new
+		liste = self.find(listeid)
+		emails.scan(User.email_regex) { |w| emailsarr << w}
+		emailsarr.each do |single|
+			if User.email?(single) and not has_adress?(single, listeid)
+				result = %x(/usr/bin/mlmmj-sub -L #{liste.bane} -a #{single} 2>&1) 
 				errors << result unless result = nil  			
 			end
 		end
 		if errors.any?
-			return "Errors occured: #{errors.to_s}"
+			errors[:base] << errors.to_s
+			return false
 		else
 			return true  		
 		end
 	end
 
 
-	def innmeld(adresser)
-		adresser.scan(@emailRE) { |w| @adr << w}
-		@adr.each{ |x|
-			`#{@mlmmj_path}mlmmj-sub -L #{@list_path}#{@listemdomene} -a #{x.strip}`
-			`echo "#{@mlmmj_path}mlmmj-sub -L #{@list_path}#{@listemdomene} -a #{x.strip}" >> /tmp/nortest2`
-		}
-	end
-	def avmeld(avmeldearr)
-		avmlengde = 0
-		avmeldearr.each{ |name, value|
-			if value == "1"
-				`#{@mlmmj_path}mlmmj-unsub -L #{@list_path}#{@listemdomene} -a #{name.strip}`
-				`echo "#{@mlmmj_path}mlmmj-unsub -L #{@list_path}#{@listemdomene} -a #{name}" >> /tmp/nortest2`
-				avmlengde = avmlengde + 1
-			end
-		}
-		return avmlengde
-	end
+	# def innmeld(adresser)
+	# 	adresser.scan(@emailRE) { |w| @adr << w}
+	# 	@adr.each{ |x|
+	# 		`#{@mlmmj_path}mlmmj-sub -L #{@list_path}#{@listemdomene} -a #{x.strip}`
+	# 		`echo "#{@mlmmj_path}mlmmj-sub -L #{@list_path}#{@listemdomene} -a #{x.strip}" >> /tmp/nortest2`
+	# 	}
+	# end
+	# def avmeld(avmeldearr)
+	# 	avmlengde = 0
+	# 	avmeldearr.each{ |name, value|
+	# 		if value == "1"
+	# 			`#{@mlmmj_path}mlmmj-unsub -L #{@list_path}#{@listemdomene} -a #{name.strip}`
+	# 			`echo "#{@mlmmj_path}mlmmj-unsub -L #{@list_path}#{@listemdomene} -a #{name}" >> /tmp/nortest2`
+	# 			avmlengde = avmlengde + 1
+	# 		end
+	# 	}
+	# 	return avmlengde
+	# end
 
 end
