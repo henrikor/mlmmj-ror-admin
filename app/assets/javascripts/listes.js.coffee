@@ -1,18 +1,24 @@
 $ ->
   $("#catalog").accordion()
-  $("#catalog li").draggable
-    appendTo: "body"
-    helper: "clone"
+  $("#catalog li").draggable()
+#    if $('#unsub').val().match(ui.draggable.text())
+#      $( ".selector" ).draggable( "option", "cancel", ".title" )
+
+#   appendTo: "body")
+#   helper: "clone"
 
   $("#cart ol").droppable(
     activeClass: "ui-state-default"
     hoverClass: "ui-state-hover"
     accept: ":not(.ui-sortable-helper)"
     drop: (event, ui) ->
-      $(this).find(".placeholder").remove()
-      $("<li></li>").text(ui.draggable.text()).appendTo this
-      $('#unsub').append(ui.draggable.text())
-      return
+      if $('#unsub').val().match(ui.draggable.text())
+      else
+        $(this).addClass("ui-state-highlight")    
+        $(this).find(".placeholder").remove()
+        $("<li></li>").text(ui.draggable.text()).appendTo this
+        $('#unsub').append(ui.draggable.text())
+        return
   ).sortable
     items: "li:not(.placeholder)"
     sort: ->
@@ -23,3 +29,5 @@ $ ->
       return
 
   return
+
+

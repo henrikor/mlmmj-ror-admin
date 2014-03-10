@@ -1,5 +1,6 @@
 class ChangesController < ApplicationController
   before_action :set_change, only: [:show, :edit, :update, :destroy]
+  before_action :moderator?
 
   # GET /changes
   # GET /changes.json
@@ -24,12 +25,18 @@ class ChangesController < ApplicationController
   # POST /changes
   # POST /changes.json
   def create
-    @change = Change.new(change_params)
+    listbane = change_params[:listbane]
+    @change = Change.new(change_params.except(:listbane))
+    @change[:user_id] = current_user.id
+    liste = Liste.find_by(bane: listbane)
+    @change[:list_id] = liste.id
 
     respond_to do |format|
-      if Liste.mlmmj_sub(change_params[:added_adresses], change_params[:listbane]) #&& Change.mlmmj_unsub
+#      if Liste.mlmmj_sub(change_params[:added_adresses], change_params[:listbane]) #&& Change.mlmmj_unsub
+
+      if Liste.mlmmj_sub(@change[:added_adresses], listbane) #&& Change.mlmmj_unsub
         if @change.save
-          format.html { redirect_to @change, notice: 'Change was successfully created.' }
+          format.html { redirect_to @change, notice: "Change was successfully created."   }
           format.json { render action: 'show', status: :created, location: @change }
         else
           format.html { render action: 'new' }
