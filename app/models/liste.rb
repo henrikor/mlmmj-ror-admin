@@ -29,11 +29,12 @@ class Liste < ActiveRecord::Base
 	def self.subscribers(listeid)
 		liste = self.find(listeid)
 		`/usr/bin/mlmmj-list -L #{liste.bane}`
+#		Rails.logger.info { "Listebane: #{liste.bane}" }
 	end
 
 	def self.has_adress?(string, listeid)
 		members = subscribers(listeid)
-		if members =~ listeid
+		if members.include?(string)
 			return true
 		else
 			return false
@@ -44,10 +45,20 @@ class Liste < ActiveRecord::Base
 		errors = Array.new
 		emailsarr = Array.new
 		liste = self.find(listeid)
-		emails.scan(User.email_regex) { |w| emailsarr << w}
+		Rails.logger.info { "Alle e-poster: #{emails}" }
+#		emails.scan(User.email_regex) { |w| 
+		emails.scan(/.*\r/) { |w| 
+			emailsarr << w.strip if w =~ /\w/
+			Rails.logger.info { "epost: #{w.strip}" }
+		}
 		emailsarr.each do |single|
+			Rails.logger.info { "e-post array single: #{single}" }
+
 			if User.email?(single) and not has_adress?(single, listeid)
+				Rails.logger.info { "#{single} er e-post og finnes ikke på lista fra før: " }
+
 				result = %x(/usr/bin/mlmmj-sub -L #{liste.bane} -a #{single} 2>&1) 
+				Rails.logger.info { "Result: #{result}" }
 				errors << result unless result = nil  			
 			end
 		end
