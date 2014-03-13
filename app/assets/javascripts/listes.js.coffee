@@ -14,7 +14,6 @@ $ ->
     drop: (event, ui) ->
       if $('#unsub').val().match(ui.draggable.text())
       else
-        $(this).addClass("ui-state-highlight")    
         $(this).find(".placeholder").remove()
         $("<li></li>").text(ui.draggable.text()).appendTo this
         $('#unsub').append(ui.draggable.text())
