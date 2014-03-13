@@ -71,6 +71,32 @@ class Liste < ActiveRecord::Base
 	end
 
 
+	def self.mlmmj_unsub(emails, listeid)
+		errors = Array.new
+		emailsarr = Array.new
+		liste = self.find(listeid)
+		Rails.logger.info { "Unsub: Alle e-poster: #{emails}" }
+#		emails.scan(User.email_regex) { |w| 
+		emails.scan(/.*\r/) { |w| 
+			emailsarr << w.strip if w =~ /\w/
+			Rails.logger.info { "Unsub: epost: #{w.strip}" }
+		}
+		emailsarr.each do |single|
+			Rails.logger.info { "Unsub: e-post array single: #{single}" }
+				Rails.logger.info { "#{single} er e-post og finnes ikke på lista fra før: " }
+				result = %x(/usr/bin/mlmmj-unsub -L #{liste.bane} -a #{single} 2>&1) 
+				Rails.logger.info { "Result: #{result}" }
+				errors << result unless result = nil  			
+		end
+		if errors.any?
+			errors[:base] << errors.to_s
+			return false
+		else
+			return true  		
+		end
+	end
+
+
 	# def innmeld(adresser)
 	# 	adresser.scan(@emailRE) { |w| @adr << w}
 	# 	@adr.each{ |x|

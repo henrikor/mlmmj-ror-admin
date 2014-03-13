@@ -32,7 +32,7 @@ class ChangesController < ApplicationController
     @change[:list_id] = liste.id
 
     respond_to do |format|
-      if Liste.mlmmj_sub(change_params[:added_adresses], liste.id) #&& Change.mlmmj_unsub
+      if Liste.mlmmj_sub(change_params[:added_adresses], liste.id) && Liste.mlmmj_unsub(change_params[:removed_adresses], liste.id)
         if @change.save
           format.html { redirect_to @change, notice: "Change was successfully created."   }
           format.json { render action: 'show', status: :created, location: @change }
