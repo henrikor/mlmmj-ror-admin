@@ -1,6 +1,6 @@
 $ ->
-  $("#catalog").accordion()
-  $("#catalog li").draggable()
+  $("#members").accordion()
+  $("#members li").draggable()
 #    if $('#unsub').val().match(ui.draggable.text())
 #      $( ".selector" ).draggable( "option", "cancel", ".title" )
 
@@ -9,6 +9,7 @@ $ ->
 
   $("#cart ol").droppable(
     activeClass: "ui-state-default"
+#    hoverClass: "ui-state-highlight"
     hoverClass: "ui-state-hover"
     accept: ":not(.ui-sortable-helper)"
     drop: (event, ui) ->
