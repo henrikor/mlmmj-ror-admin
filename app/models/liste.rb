@@ -59,7 +59,7 @@ class Liste < ActiveRecord::Base
 
 				result = %x(/usr/bin/mlmmj-sub -L #{liste.bane} -a #{single} 2>&1) 
 				Rails.logger.info { "Result: #{result}" }
-				errors << result unless result = nil  			
+				errors << result unless result == nil  			
 			end
 		end
 		if errors.any?
@@ -86,7 +86,7 @@ class Liste < ActiveRecord::Base
 				Rails.logger.info { "#{single} er e-post og finnes ikke på lista fra før: " }
 				result = %x(/usr/bin/mlmmj-unsub -L #{liste.bane} -a #{single} 2>&1) 
 				Rails.logger.info { "Result: #{result}" }
-				errors << result unless result = nil  			
+				errors << result unless result == nil  			
 		end
 		if errors.any?
 			errors[:base] << errors.to_s

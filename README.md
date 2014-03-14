@@ -19,6 +19,3 @@ If you are using
     $ bundle install
     $ bundle exec rake db:migrate
     $ bundle exec rake db:test:prepare
-    $ bundle exec rspec spec/
-
-If the tests don't pass, it means there may be something wrong with your system. If they do pass, then you can debug your code by comparing it with the reference implementation.
