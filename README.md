@@ -1,8 +1,16 @@
-# Ruby on Rails Tutorial: sample application
+# MLMMJ e-mail list administration
 
-This is the sample application for
-[*Ruby on Rails Tutorial: Learn Web Development with Rails*](http://railstutorial.org/)
-by [Michael Hartl](http://michaelhartl.com/). You can use this reference implementation to help track down errors if you end up having trouble with code in the tutorial. In particular, as a first debugging check I suggest getting the test suite to pass on your local machine:
+If you are using 
+[*MLMMJ*](http://mlmmj.org/) mailinglist program, you might find this web app usefull.
+
+
+## Features:
+
+- Mass subscription of e-mail adresse (just past email for subscription)
+- Drag and drop unsubscription
+- Assig mailinglists to groups and e-mail list managing users to groups for delegating management of lists to  other
+
+## Installation:
 
     $ cd /tmp
     $ git clone https://github.com/railstutorial/sample_app_rails_4.git
