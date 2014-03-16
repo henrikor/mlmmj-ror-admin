@@ -1,6 +1,6 @@
 class ListesController < ApplicationController
   before_action :set_liste, only: [:show, :edit, :update, :destroy]
-  before_action :can_admin?, only: [:edit, :update, :destroy]
+  before_action :can_admin?, only: [:edit, :update, :destroy, :massnew]
   before_action :can_moderate?, only: [:show]
   before_action :moderator?
 
@@ -24,6 +24,12 @@ class ListesController < ApplicationController
 
   # GET /listes/1/edit
   def edit
+  end
+
+  def massnew
+    alllistes = Liste.all
+    paths = Path.all
+    
   end
 
   # POST /listes
