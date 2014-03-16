@@ -1,4 +1,6 @@
 SampleApp::Application.routes.draw do
+  resources :paths
+
   resources :changes
   resources :listes
   resources :users
