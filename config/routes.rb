@@ -1,6 +1,5 @@
 SampleApp::Application.routes.draw do
   resources :changes
-
   resources :listes
   resources :users
   resources :groups #,        only: [:new, :create, :edit, :destroy, :index]

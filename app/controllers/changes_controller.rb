@@ -37,11 +37,15 @@ class ChangesController < ApplicationController
           format.html { redirect_to @change, notice: "Change was successfully created."   }
           format.json { render action: 'show', status: :created, location: @change }
         else
-          format.html { render action: 'new' }
-          format.json { render json: @change.errors, status: :unprocessable_entity }
+          format.html { redirect_to @change, notice: "Change was not created, check list!."   }
+          format.json { render action: 'show', status: :created, location: @change }
+
+#          format.html { render action: 'new' }
+#          format.json { render json: @change.errors, status: :unprocessable_entity }
         end
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to @change, notice: "Change was not created, check list!."   }
+#        format.html { render action: 'new' }
         format.json { render json: @change.errors, status: :unprocessable_entity }       
       end
     end
@@ -55,8 +59,11 @@ class ChangesController < ApplicationController
         format.html { redirect_to @change, notice: 'Change was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @change.errors, status: :unprocessable_entity }
+          format.html { redirect_to @change, notice: "Change was not created, check list!."   }
+          format.json { render action: 'show', status: :created, location: @change }
+
+        # format.html { render action: 'edit' }
+        # format.json { render json: @change.errors, status: :unprocessable_entity }
       end
     end
   end

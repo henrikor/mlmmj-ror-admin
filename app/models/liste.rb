@@ -42,7 +42,7 @@ class Liste < ActiveRecord::Base
 	end
 
 	def self.mlmmj_sub(emails, listeid)
-		errors = Array.new
+		mlerrors = Array.new
 		emailsarr = Array.new
 		liste = self.find(listeid)
 		Rails.logger.info { "Alle e-poster: #{emails}" }
@@ -59,20 +59,19 @@ class Liste < ActiveRecord::Base
 
 				result = %x(/usr/bin/mlmmj-sub -L #{liste.bane} -a #{single} 2>&1) 
 				Rails.logger.info { "Result: #{result}" }
-				errors << result unless result == nil  			
+				mlerrors << result unless result == nil  			
 			end
 		end
-		if errors.any?
-			errors[:base] << errors.to_s
-			return false
-		else
+#		if mlerrors.any?			
+#			return false
+#		else
 			return true  		
-		end
+#		end
 	end
 
 
 	def self.mlmmj_unsub(emails, listeid)
-		errors = Array.new
+		mlerrors = Array.new
 		emailsarr = Array.new
 		liste = self.find(listeid)
 		Rails.logger.info { "Unsub: Alle e-poster: #{emails}" }
@@ -86,14 +85,13 @@ class Liste < ActiveRecord::Base
 				Rails.logger.info { "#{single} er e-post og finnes ikke på lista fra før: " }
 				result = %x(/usr/bin/mlmmj-unsub -L #{liste.bane} -a #{single} 2>&1) 
 				Rails.logger.info { "Result: #{result}" }
-				errors << result unless result == nil  			
+				mlerrors << result unless result == nil  			
 		end
-		if errors.any?
-			errors[:base] << errors.to_s
-			return false
-		else
+#		if mlerrors.any?			
+#			return false
+#		else
 			return true  		
-		end
+#		end
 	end
 
 
