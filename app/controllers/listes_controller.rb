@@ -29,7 +29,16 @@ class ListesController < ApplicationController
   def massnew
     alllistes = Liste.all
     paths = Path.all
-    
+    @unconfed = Array.new
+
+    paths.each do |single|
+      Dir.glob("#{single.path}*") { |f| 
+        @unconfed << f if FileTest.directory?(f)     
+      }
+    end
+    alllistes.each { |e|
+      @unconfed.delete(e.bane) if @unconfed.include?(e.bane) 
+    }
   end
 
   # POST /listes
@@ -83,4 +92,4 @@ class ListesController < ApplicationController
       params.require(:liste).permit(:navn, :bane, :beskrivelse, {:group_ids => []})
     end
 
-end
+  end

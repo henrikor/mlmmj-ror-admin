@@ -1,5 +1,6 @@
 SampleApp::Application.routes.draw do
   resources :paths
+  match '/listes/massnew',  to: 'listes#massnew',            via: 'get'
 
   resources :changes
   resources :listes
