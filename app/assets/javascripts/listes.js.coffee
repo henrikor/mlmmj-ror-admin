@@ -31,12 +31,8 @@ $ ->
   return
 
 $(document).ready ->
-  # alert "Submitted"
-
   $(".listform form").submit ->
-    alert "Submitted"
     $(this).parents(".listform").addClass("submitted")
-    # $(this).addClass("submitted")
     return
 
 # $(document).ready ->
