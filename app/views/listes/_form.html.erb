@@ -1,16 +1,19 @@
 <div class="row">
-  <div class="span6 offset3">
+  <div class="span12">
 <%= form_for(@liste, remote: true) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
 
-    <%= f.label :navn %>
-    <%= f.text_field :navn %>
-
     <%= f.label :bane %>
-    <%= f.text_field :bane %>
+    <%= f.text_field :bane, :size=>45 %>
+
+    <%= f.label :navn %>
+    <%= f.text_field :navn, class: "input-mir" %>
 
     <%= f.label :beskrivelse %>
     <%= f.text_field :beskrivelse %>
+
+
+  </div>
 
 
   </div>
@@ -19,13 +22,13 @@
 
 <% if current_user.admin? %>
 <div class="row">
-  <div class="span6 offset3">
+  <div class="span12">
     <div class="gruppebokser">
       <%=  collection_check_boxes(:liste, :group_ids, Group.all, :id, :navn) do |b| -%>
       <span class="sjekkbokser"> <%= b.label(class: "sjekkboks") { b.check_box(class: "sjekkboks") + b.text} -%> </span> 
       <% end -%>
       <% end -%>
-      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+      <%= f.submit "Save changes", class: "btn btn-sm btn-primary" %>
       <% end %>
 
     </div>
