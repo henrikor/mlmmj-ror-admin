@@ -5,6 +5,9 @@
 	<% if current_user.admin? %>
 		<li><%= link_to "Users", users_path %></li>
 		<li><%= link_to "Groups", groups_path %></li>
+        <li><%= link_to "mlmj Paths", paths_path %></li>
+        <li><%= link_to "Add lists", "/listes/massnew" %></li>
+
 	<% end -%>
 	<% if User.moderator?(current_user) %>
 	<li><%= link_to "Listes", listes_path %></li>

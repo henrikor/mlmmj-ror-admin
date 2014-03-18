@@ -4,15 +4,23 @@
       <%= link_to "mlmmj e-post liste administrasjon", root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
-          <li><%= link_to "Hjem", root_path %></li>
-          <li><%= link_to "Hjelp", help_path %></li>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Help", help_path %></li>
           <% if signed_in? %>
             <% if current_user.admin? %>
-              <li><%= link_to "Brukere", users_path %></li>
-              <li><%= link_to "Grupper", groups_path %></li>
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Admin <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+              <li><%= link_to "Users", users_path %></li>
+              <li><%= link_to "Groups", groups_path %></li>
+              <li><%= link_to "mlmj Paths", paths_path %></li>
+              <li><%= link_to "Add lists", "/listes/massnew" %></li>
+            </ul>
             <% end -%>
             <% if User.moderator?(current_user) %>
-              <li><%= link_to "Lister", listes_path %></li>
+              <li><%= link_to "Listes", listes_path %></li>
             <% end -%>
 
 
