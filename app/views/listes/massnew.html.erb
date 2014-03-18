@@ -1,0 +1,10 @@
+<h2>Existing lists not configured in this app:</h2>
+<% @unconfed.each do |single| %>
+	<% @liste = Liste.new %>
+	<% @liste.bane = single %>
+
+	<div id="test">
+		<%= render 'form' %>
+	</div>
+
+<% end %>
