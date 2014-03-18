@@ -30,4 +30,8 @@ $ ->
 
   return
 
-
+$(document).ready ->
+  $("#new_change").on("ajax:success", (e, data, status, xhr) ->
+    $("#new_change").append xhr.responseText
+  ).on "ajax:error", (e, xhr, status, error) ->
+    $("#new_change").append "<p>ERROR</p>"

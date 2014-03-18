@@ -1,4 +1,4 @@
-<%= form_for(@change) do |f| %>
+<%= form_for(@change, remote: true) do |f| %>
 <input type="hidden" name="change[listbane]" value="<%= @liste.bane %>">
 
 <% if @change.errors.any? %>

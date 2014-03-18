@@ -49,7 +49,11 @@ class ListesController < ApplicationController
     respond_to do |format|
       if @liste.save
         format.html { redirect_to @liste, notice: 'Liste was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @liste }
+#        format.json { render action: 'show', status: :created, location: @liste }
+
+        format.js   {}
+        format.json { render json: @liste, status: :created, location: @liste }
+
       else
         format.html { render action: 'new' }
         format.json { render json: @liste.errors, status: :unprocessable_entity }

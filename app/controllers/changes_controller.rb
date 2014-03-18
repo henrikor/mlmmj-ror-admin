@@ -35,10 +35,10 @@ class ChangesController < ApplicationController
       if Liste.mlmmj_sub(change_params[:added_adresses], liste.id) && Liste.mlmmj_unsub(change_params[:removed_adresses], liste.id)
         if @change.save
           format.html { redirect_to @change, notice: "Change was successfully created."   }
-          format.json { render action: 'show', status: :created, location: @change }
+          format.json { render json: @change, status: :created, location: @change }
         else
           format.html { redirect_to @change, notice: "Change was not created, check list!."   }
-          format.json { render action: 'show', status: :created, location: @change }
+          format.json { render json: 'show', status: :created, location: @change }
 
 #          format.html { render action: 'new' }
 #          format.json { render json: @change.errors, status: :unprocessable_entity }
