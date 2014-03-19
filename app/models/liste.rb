@@ -47,6 +47,7 @@ class Liste < ActiveRecord::Base
 		liste = self.find(listeid)
 		Rails.logger.info { "Alle e-poster: #{emails}" }
 #		emails.scan(User.email_regex) { |w| 
+		emails = emails + "\r" 
 		emails.scan(/.*\r/) { |w| 
 			emailsarr << w.strip if w =~ /\w/
 			Rails.logger.info { "epost: #{w.strip}" }
