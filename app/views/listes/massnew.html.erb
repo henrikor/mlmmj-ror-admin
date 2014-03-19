@@ -1,9 +1,11 @@
 <h2>Existing lists not configured in this app:</h2>
+<% @nr = 0 %>
 <% @unconfed.each do |single| %>
+	<% @nr = @nr + 1%>
+
 	<% @liste = Liste.new %>
 	<% @liste.bane = single %>
-
-	<div class="listform">
+	<div id="list<%= @nr %>" class="listform">
 		<%= render 'form' %>
 	</div>
 

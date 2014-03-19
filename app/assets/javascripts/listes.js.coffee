@@ -32,7 +32,11 @@ $ ->
 
 $(document).ready ->
   $(".listform form").submit ->
-    $(this).parents(".listform").addClass("submitted")
+    currentId = $(this).attr('id')
+    nr = currentId.replace("form","")
+    # alert("#list"+nr)
+    $("#list"+nr).addClass("submitted")
+    # $(this).parents(".listform").addClass("submitted")
     return
 
 # $(document).ready ->

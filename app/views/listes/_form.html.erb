@@ -1,6 +1,6 @@
 <div class="row">
   <div class="span12">
-<%= form_for(@liste, remote: true) do |f| %>
+    <%= form_for(@liste, remote: true, :html => { :id => "form#{@nr}" }) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
 
     <%= f.label :bane %>
@@ -14,9 +14,6 @@
 
 
   </div>
-
-
-  </div>
 </div>
 
 
@@ -27,10 +24,9 @@
       <%=  collection_check_boxes(:liste, :group_ids, Group.all, :id, :navn) do |b| -%>
       <span class="sjekkbokser"> <%= b.label(class: "sjekkboks") { b.check_box(class: "sjekkboks") + b.text} -%> </span> 
       <% end -%>
-      <% end -%>
       <%= f.submit "Save changes", class: "btn btn-sm btn-primary" %>
-      <% end %>
-
     </div>
   </div>
 </div>
+<% end %>
+<% end -%>
